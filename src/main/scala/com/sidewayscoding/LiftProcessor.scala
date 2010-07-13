@@ -24,7 +24,7 @@ object SnippetTemplate extends DefaultLiftTemplate {
 	def name = "snippet"
 	def arguments = {
 		object packageArgument extends Argument("pack") {
-			override def transformationForPathValue(before: String) = Helper.pathOfPackage(before)
+			override def transformationForPathValue(before: String) = TemplateHelper.pathOfPackage(before)
 		}
 		Argument("name") :: packageArgument ::  Nil
 	}
@@ -40,7 +40,7 @@ object MapperTemplate extends DefaultLiftTemplate {
 		
 	def arguments = {
 		object packageArgument extends Argument("pack") {
-			override def transformationForPathValue(before: String) = Helper.pathOfPackage(before)
+			override def transformationForPathValue(before: String) = TemplateHelper.pathOfPackage(before)
 		}
 		object nameArgument extends Argument("name") with Default with Value{ value = "defaultValue" }
 		object fieldArgument extends Argument("fields") with Repeatable with Optional
@@ -60,7 +60,7 @@ object CometTemplate extends DefaultLiftTemplate {
 	
 	def arguments = {
 		object packageArgument extends Argument("pack") {
-			override def transformationForPathValue(before: String) = Helper.pathOfPackage(before)
+			override def transformationForPathValue(before: String) = TemplateHelper.pathOfPackage(before)
 		}
 		Argument("name") :: packageArgument ::  Nil
 	}
@@ -92,7 +92,7 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 		}
 		
 		object mainPackage extends Argument("pack") with Default with Value { value = defaultMainPackage 
-			override def transformationForPathValue(before: String) = Helper.pathOfPackage(before)
+			override def transformationForPathValue(before: String) = TemplateHelper.pathOfPackage(before)
 		}
 		
 		List(mainPackage)
@@ -100,7 +100,7 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	
 	override def postRenderAction(arguments: List[ArgumentResult]): Unit = {
 
-		Helper.createFolderStructure(arguments)(
+		TemplateHelper.createFolderStructure(arguments)(
 			"src/main/resources",
 			"src/main/resources/props",
 			"src/main/scala",
@@ -120,43 +120,43 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 		)
 		
 		// test
-		Helper.copy(
+		TemplateHelper.copy(
 			"%s/test/LiftConsole.scala".format(basePath),
 			"src/test/scala/LiftConsole.scala"
 		)
-		Helper.copy(
+		TemplateHelper.copy(
 			"%s/test/RunWebApp.scala".format(basePath),
 			"src/test/scala/RunWebApp.scala"
 		)
 		
 		// resources
-		Helper.copy(
+		TemplateHelper.copy(
      "%s/resources/props/default.props".format(basePath),
      "src/main/resources/props/default.props"
     )
 		
 		// webapp
-    // Helper.copy(
+    // TemplateHelper.copy(
     //      "%s/webapp/images/ajax-loader.gif".format(basePath),
     //      "src/main/webapp/images/ajax-loader.gif"
     //     )
-    Helper.copy(
+    TemplateHelper.copy(
      "%s/webapp/static/index.html".format(basePath),
      "src/main/webapp/static/index.html"
     )
-    Helper.copy(
+    TemplateHelper.copy(
      "%s/webapp/templates-hidden/default.html".format(basePath),
      "src/main/webapp/templates-hidden/default.html"
     )
-    Helper.copy(
+    TemplateHelper.copy(
      "%s/webapp/templates-hidden/wizard-all.html".format(basePath),
      "src/main/webapp/templates-hidden/wizard-all.html"
     )
-    Helper.copy(
+    TemplateHelper.copy(
      "%s/webapp/WEB-INF/web.xml".format(basePath),
      "src/main/webapp/WEB-INF/web.xml"
     )
-    Helper.copy(
+    TemplateHelper.copy(
      "%s/webapp/index.html".format(basePath),
      "src/main/webapp/index.html"
     )

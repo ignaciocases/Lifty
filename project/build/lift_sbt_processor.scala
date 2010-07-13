@@ -2,14 +2,12 @@ import sbt._
 
 class LiftSBTProcessor(info: ProjectInfo) extends ProcessorProject(info) {
 	
-	// repos
-	val nexus = "Scala Tools Nexus" at "http://nexus.scala-tools.org/content/repositories/releases/"
+	val scalatools_release = "Scala Tools Releases" at "http://scala-tools.org/repo-releases/"
+	val scalatools_snapshots = "Scala Tools Snapshot" at "http://scala-tools.org/repo-snapshots/"
 	
-	// dependencies
 	val sbt_template_engine = "com.sidewayscoding" % "sbt_template_engine_2.7.7" % "0.1"
 	
-	// PUBLISHING
-	override def managedStyle = ManagedStyle.Ivy
+	override def managedStyle = ManagedStyle.Maven
 	val publishTo = "Scala Tools Nexus" at "http://nexus.scala-tools.org/content/repositories/releases/"
 	Credentials(Path.userHome / "dev" / ".nexus_credentials", log)
 	

@@ -102,6 +102,7 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 
 		Helper.createFolderStructure(arguments)(
 			"src/main/resources",
+			"src/main/resources/props",
 			"src/main/scala",
 			"src/main/scala/bootstrap",
 			"src/main/scala/bootstrap/liftweb",
@@ -111,24 +112,54 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 			"src/main/scala/${pack}/model",
 			"src/main/scala/${pack}/snippet",
 			"src/main/scala/${pack}/view",
-			"src/main/webapp"
+			"src/main/webapp",
+			"src/main/webapp/images",
+			"src/main/webapp/templates-hidden",
+			"src/main/webapp/static",
+			"src/main/webapp/WEB-INF"
 		)
+		
+		// test
 		Helper.copy(
 			"%s/test/LiftConsole.scala".format(basePath),
-			Helper.replaceVariablesInPath("src/test/scala/LiftConsole.scala", arguments)
+			"src/test/scala/LiftConsole.scala"
 		)
 		Helper.copy(
 			"%s/test/RunWebApp.scala".format(basePath),
-			Helper.replaceVariablesInPath("src/test/scala/RunWebApp.scala", arguments)
+			"src/test/scala/RunWebApp.scala"
 		)
+		
+		// resources
 		Helper.copy(
-			"%s/webapp".format(basePath),
-			"src/main/webapp"
-		)
-		Helper.copy(
-			"%s/resources".format(basePath),
-			"src/main/resources"
-		)
+     "%s/resources/props/default.props".format(basePath),
+     "src/main/resources/props/default.props"
+    )
+		
+		// webapp
+    // Helper.copy(
+    //      "%s/webapp/images/ajax-loader.gif".format(basePath),
+    //      "src/main/webapp/images/ajax-loader.gif"
+    //     )
+    Helper.copy(
+     "%s/webapp/static/index.html".format(basePath),
+     "src/main/webapp/static/index.html"
+    )
+    Helper.copy(
+     "%s/webapp/templates-hidden/default.html".format(basePath),
+     "src/main/webapp/templates-hidden/default.html"
+    )
+    Helper.copy(
+     "%s/webapp/templates-hidden/wizard-all.html".format(basePath),
+     "src/main/webapp/templates-hidden/wizard-all.html"
+    )
+    Helper.copy(
+     "%s/webapp/WEB-INF/web.xml".format(basePath),
+     "src/main/webapp/WEB-INF/web.xml"
+    )
+    Helper.copy(
+     "%s/webapp/index.html".format(basePath),
+     "src/main/webapp/index.html"
+    )
 	}
 		
 	def files = {

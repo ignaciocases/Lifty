@@ -48,13 +48,13 @@ class Boot {
      * Show the spinny image when an Ajax call starts
      */
     LiftRules.ajaxStart =
-      Full(() => LiftRules.jsArtifacts.show("ajax-loader").cmd)
+      Full(() => LiftRules.jsArtifacts.show("http://scala-tools.org/ajax-loader.gif").cmd)
 
     /*
      * Make the spinny image go away when it ends
      */
     LiftRules.ajaxEnd =
-      Full(() => LiftRules.jsArtifacts.hide("ajax-loader").cmd)
+      Full(() => LiftRules.jsArtifacts.hide("http://scala-tools.org/ajax-loader.gif").cmd)
 
     LiftRules.early.append(makeUtf8)
 

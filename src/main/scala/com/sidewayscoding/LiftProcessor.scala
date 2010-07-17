@@ -42,7 +42,7 @@ object MapperTemplate extends DefaultLiftTemplate {
 		object nameArgument extends Argument("name") with Default with Value{ value = "defaultValue" }
 		object fieldArgument extends Argument("fields") with Repeatable with Optional
   	
-  	packageArgument :: nameArgument :: fieldArgument :: Nil
+  	nameArgument :: packageArgument :: fieldArgument :: Nil
 	}
 	
   def files = {

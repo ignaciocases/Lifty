@@ -1,12 +1,12 @@
 package com.sidewayscoding
 
+import LiftHelper._
 import sbt._
 import sbt.processor.BasicProcessor
 
 import template.engine._
 import template.util.TemplateHelper._
-import java.io._
-import java.util.Properties
+import net.liftweb.common._
 
 trait DefaultLiftTemplate extends Template with Create with Delete{}
 
@@ -15,7 +15,11 @@ object SnippetTemplate extends DefaultLiftTemplate {
 	def name = "snippet"
 	
 	def arguments = {
-		object packageArgument extends Argument("pack") {
+		object packageArgument extends Argument("pack") with Default with Value {
+		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala") match {
+		    case Full(packageName) => packageName + ".snippet"
+		    case _ => "code.snippet" // At some point it should request a package here
+		  }
 			override def transformationForPathValue(before: String) = pathOfPackage(before)
 		}
 		Argument("name") :: packageArgument ::  Nil
@@ -36,7 +40,11 @@ object MapperTemplate extends DefaultLiftTemplate {
 	  replaceVariablesInPath("Remember to add ${name} to the Schemifier in your boot.scala file", argResults)
 		
 	def arguments = {
-		object packageArgument extends Argument("pack") {
+		object packageArgument extends Argument("pack") with Default with Value {
+		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala") match {
+		    case Full(packageName) => packageName + ".model"
+		    case _ => "code.model" // At some point it should request a package here
+		  }
 			override def transformationForPathValue(before: String) = pathOfPackage(before)
 		}
 		object nameArgument extends Argument("name") with Default with Value{ value = "defaultValue" }
@@ -60,7 +68,11 @@ object CometTemplate extends DefaultLiftTemplate {
 	  replaceVariablesInPath("Add <lift:comet type='${name}' /> in a template file to use the comet component", argResults)
 	
 	def arguments = {
-		object packageArgument extends Argument("pack") {
+		object packageArgument extends Argument("pack") with Default with Value {
+		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala") match {
+		    case Full(packageName) => packageName + ".comet"
+		    case _ => "code.model" // At some point it should request a package here
+		  }
 			override def transformationForPathValue(before: String) = pathOfPackage(before)
 		}
 		Argument("name") :: packageArgument ::  Nil
@@ -78,13 +90,9 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	
 	val basePath = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)
 	
-	val defaultMainPackage = { // the default main package should be the project organization
-		val properties = new Properties()
-		properties.load(new FileInputStream("project/build.properties"))
-		properties.getProperty("project.organization") match {
-			case null => "code" // default
-			case str => str
-		}
+	lazy val defaultMainPackage = searchForMainPackage match {
+	  case Full(pack) => pack
+	  case _ => "code"
 	}
 	
 	def name = "project"

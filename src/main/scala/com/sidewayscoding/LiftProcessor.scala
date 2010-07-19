@@ -19,8 +19,9 @@ object SnippetTemplate extends DefaultLiftTemplate {
 	def arguments = {
 		object packageArgument extends Argument("pack") with Default with Value {
 		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala") match {
-		    case Full(packageName) => packageName + ".snippet"
-		    case _ => "code.snippet" // At some point it should request a package here
+		    case Full(packageName) => Full(packageName + ".snippet")
+		    case Empty => Empty
+		    case Failure(msg,_,_) => Failure(msg)
 		  }
 			override def transformationForPathValue(before: String) = pathOfPackage(before)
 		}
@@ -46,12 +47,13 @@ object MapperTemplate extends DefaultLiftTemplate {
 	def arguments = {
 		object packageArgument extends Argument("pack") with Default with Value {
 		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala") match {
-		    case Full(packageName) => packageName + ".model"
-		    case _ => "code.model" // At some point it should request a package here
+		    case Full(packageName) => Full(packageName + ".model")
+		    case Empty => Empty
+		    case Failure(msg,_,_) => Failure(msg)
 		  }
 			override def transformationForPathValue(before: String) = pathOfPackage(before)
 		}
-		object nameArgument extends Argument("name") with Default with Value{ value = "defaultValue" }
+		object nameArgument extends Argument("name")
 		object fieldArgument extends Argument("fields") with Repeatable with Optional
   	
   	nameArgument :: packageArgument :: fieldArgument :: Nil
@@ -76,8 +78,9 @@ object CometTemplate extends DefaultLiftTemplate {
 	def arguments = {
 		object packageArgument extends Argument("pack") with Default with Value {
 		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala") match {
-		    case Full(packageName) => packageName + ".comet"
-		    case _ => "code.model" // At some point it should request a package here
+		    case Full(packageName) => Full(packageName + ".comet")
+		    case Empty => Empty
+		    case Failure(msg,_,_) => Failure(msg)
 		  }
 			override def transformationForPathValue(before: String) = pathOfPackage(before)
 		}
@@ -97,9 +100,10 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	val basePath = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)
 	
 	lazy val defaultMainPackage = searchForMainPackage match {
-	  case Full(pack) => pack
-	  case _ => "code"
-	}
+	  case Full(packageName) => Full(packageName + ".snippet")
+    case Empty => Empty
+    case Failure(msg,_,_) => Failure(msg)
+  }
 	
 	def name = "project"
 	
@@ -117,24 +121,7 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	
 	override def postRenderAction(arguments: List[ArgumentResult]): Unit = {
 
-		createFolderStructure(arguments)(
-			"src/main/resources",
-			"src/main/resources/props",
-			"src/main/scala",
-			"src/main/scala/bootstrap",
-			"src/main/scala/bootstrap/liftweb",
-			"src/main/scala/${pack}",
-			"src/main/scala/${pack}/comet",
-			"src/main/scala/${pack}/lib",
-			"src/main/scala/${pack}/model",
-			"src/main/scala/${pack}/snippet",
-			"src/main/scala/${pack}/view",
-			"src/main/webapp",
-			"src/main/webapp/images",
-			"src/main/webapp/templates-hidden",
-			"src/main/webapp/static",
-			"src/main/webapp/WEB-INF"
-		)
+		createFolderStructure(arguments)(LiftHelper.liftFolderStructure :_*)
 		
 		copy("%s/test/LiftConsole.scala".format(basePath),"src/test/scala/LiftConsole.scala")
 		copy("%s/test/RunWebApp.scala".format(basePath),"src/test/scala/RunWebApp.scala")

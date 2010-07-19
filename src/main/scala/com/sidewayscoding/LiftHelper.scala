@@ -6,6 +6,23 @@ import java.io._
 import scala.io.Source
 
 object LiftHelper {
+
+  def liftFolderStructure: List[String] = List("src/main/resources",
+    "src/main/resources/props",
+    "src/main/scala",
+    "src/main/scala/bootstrap",
+    "src/main/scala/bootstrap/liftweb",
+    "src/main/scala/${pack}",
+    "src/main/scala/${pack}/comet",
+    "src/main/scala/${pack}/lib",
+    "src/main/scala/${pack}/model",
+    "src/main/scala/${pack}/snippet",
+    "src/main/scala/${pack}/view",
+    "src/main/webapp",
+    "src/main/webapp/images",
+    "src/main/webapp/templates-hidden",
+    "src/main/webapp/static",
+    "src/main/webapp/WEB-INF")
   
   def searchForMainPackage: Box[String] = {
     val properties = new Properties()

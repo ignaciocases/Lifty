@@ -14,6 +14,8 @@ object SnippetTemplate extends DefaultLiftTemplate {
 	
 	def name = "snippet"
 	
+	def description = "Creates a snippet"
+	
 	def arguments = {
 		object packageArgument extends Argument("pack") with Default with Value {
 		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala") match {
@@ -36,8 +38,10 @@ object MapperTemplate extends DefaultLiftTemplate {
 	
 	def name = "mapper"
 	
+	def description = "Creates a model class using Mapper"
+	
 	override def notice(argResults: List[ArgumentResult]) = 
-	  replaceVariablesInPath("Remember to add ${name} to the Schemifier in your boot.scala file", argResults)
+	  Full(replaceVariablesInPath("Remember to add ${name} to the Schemifier in your boot.scala file", argResults))
 		
 	def arguments = {
 		object packageArgument extends Argument("pack") with Default with Value {
@@ -64,8 +68,10 @@ object CometTemplate extends DefaultLiftTemplate {
 	
 	def name = "comet"
 	
+	def description = "Creates a comet component"
+	
 	override def notice(argResults: List[ArgumentResult]) = 
-	  replaceVariablesInPath("Add <lift:comet type='${name}' /> in a template file to use the comet component", argResults)
+	  Full(replaceVariablesInPath("Add <lift:comet type='${name}' /> in a template file to use the comet component", argResults))
 	
 	def arguments = {
 		object packageArgument extends Argument("pack") with Default with Value {
@@ -96,6 +102,8 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	}
 	
 	def name = "project"
+	
+	def description = "Creates a Lift project with some functionality to get you started"
 	
 	def arguments = {
 			

@@ -100,7 +100,7 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	val basePath = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)
 	
 	lazy val defaultMainPackage = searchForMainPackage match {
-	  case Full(packageName) => Full(packageName + ".snippet")
+	  case Full(packageName) => Full(packageName)
     case Empty => Empty
     case Failure(msg,_,_) => Failure(msg)
   }

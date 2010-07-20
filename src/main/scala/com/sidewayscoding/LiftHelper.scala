@@ -7,7 +7,8 @@ import scala.io.Source
 
 object LiftHelper {
 
-  def liftFolderStructure: List[String] = List("src/main/resources",
+  def liftFolderStructure: List[String] = List(
+    "src/main/resources",
     "src/main/resources/props",
     "src/main/scala",
     "src/main/scala/bootstrap",
@@ -32,7 +33,6 @@ object LiftHelper {
 			case str => Full(str)
 		}
   }
-  
   
   /**
   * Searches for the main package used for the app in the Boot.scala class

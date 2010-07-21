@@ -2,44 +2,19 @@
 
 package bootstrap.liftweb
 
-import _root_.net.liftweb.util._
-import _root_.net.liftweb.common._
-import _root_.net.liftweb.http._
-import _root_.net.liftweb.http.provider._
-import _root_.net.liftweb.sitemap._
-import _root_.net.liftweb.sitemap.Loc._
-import Helpers._
-import _root_.net.liftweb.mapper.{DB, ConnectionManager, Schemifier, DefaultConnectionIdentifier, StandardDBVendor}
-import _root_.java.sql.{Connection, DriverManager}
+import _root_.net.liftweb.http.{LiftRules}
+import _root_.net.liftweb.sitemap.{SiteMap,Menu}
 
-/**
- * A class that's instantiated early and run.  It allows the application
- * to modify lift's environment
- */
 class Boot {
   def boot {
-
     // where to search snippet
     LiftRules.addToPackages("${pack}")
 
-    // Build SiteMap
-    val entries = Menu(Loc("Home", List("index"), "Home")) :: Nil
-
+    // build sitemap
+    val entries = List(Menu("Home") / "index")
     LiftRules.setSiteMap(SiteMap(entries:_*))
 
-    /*
-     * Show the spinny image when an Ajax call starts
-     */
-    LiftRules.ajaxStart =
-      Full(() => LiftRules.jsArtifacts.show("http://scala-tools.org/ajax-loader.gif").cmd)
-
-    /*
-     * Make the spinny image go away when it ends
-     */
-    LiftRules.ajaxEnd =
-      Full(() => LiftRules.jsArtifacts.hide("http://scala-tools.org/ajax-loader.gif").cmd)
-
+    // set character encoding
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
-
   }
 }

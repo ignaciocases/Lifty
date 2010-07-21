@@ -39,7 +39,7 @@ object LiftHelper {
   * 
   * @return A box with the string, if successfull. 
   */
-  def searchForPackageInBoot(pathToBoot: String): Box[String] = {
+  def searchForPackageInBoot(pathToBoot: String, append: Box[String]): Box[String] = {
     val regex = """\("(\S*)"\)""".r
     val file = new File(pathToBoot)
     if (file.exists) {
@@ -47,7 +47,7 @@ object LiftHelper {
       val in = scala.io.Source.fromInputStream(is)
       in.getLines.filter( _.contains("LiftRules.addToPackages")).toList match {
         case head :: rest => regex.findFirstMatchIn(head) match {
-          case Some(m) => Full(m.group(1))
+          case Some(m) => Full(m.group(1) + append.openOr("") )
           case None => Failure("Regxp search in boot failed")
         }
         case Nil => Failure("No lines contained LiftRules.addToPackages")

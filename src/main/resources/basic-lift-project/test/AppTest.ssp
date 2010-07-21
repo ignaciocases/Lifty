@@ -76,3 +76,4 @@ class AppTest extends TestCase("app") {
     }
   }
 }
+}

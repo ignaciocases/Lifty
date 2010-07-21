@@ -140,7 +140,7 @@ object BlankLiftProject extends DefaultLiftTemplate {
 		  "%s/basic-lift-project/test/AppTest.ssp".format(GlobalConfiguration.rootResources),
 		  "src/test/scala/${pack}/AppTest.scala") :: 
 		TemplateFile(
-		  "%s/basic-lift-project/ProjectDefinition.ssp".format(GlobalConfiguration.rootResources),
+		  "%s/blank-lift-project/ProjectDefinition.ssp".format(GlobalConfiguration.rootResources),
 		  "project/build/ProjectDefinition.scala")	:: 
 		Nil
 	}

@@ -9,7 +9,6 @@ class LiftSBTProcessor(info: ProjectInfo) extends ProcessorProject(info) {
   // val sbt_template_engine = "com.sidewayscoding" % "sbt_template_engine_2.7.7" % "0.2"
   val scalatest = "org.scalatest" % "scalatest" % "1.0" % "test"
   
-  
 	
 	override def managedStyle = ManagedStyle.Maven
   // val publishTo = "Scala Tools Nexus" at "http://nexus.scala-tools.org/content/repositories/releases/"

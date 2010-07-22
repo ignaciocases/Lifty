@@ -8,7 +8,13 @@ import template.engine._
 import template.util.TemplateHelper._
 import net.liftweb.common._
 
-trait DefaultLiftTemplate extends Template with Create with Delete
+trait DefaultLiftTemplate extends Template with Create with Delete{
+  lazy val defaultMainPackage = searchForMainPackage match {
+	  case Full(packageName) => Full(packageName)
+    case Empty => Empty
+    case Failure(msg,_,_) => Failure(msg)
+  }
+}
 
 object SnippetTemplate extends DefaultLiftTemplate {
 	
@@ -17,15 +23,15 @@ object SnippetTemplate extends DefaultLiftTemplate {
 	def description = "Creates a snippet"
 	
 	def arguments = {
-		object packageArgument extends PackageArgument("pack") with Default with Value {
-		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala", Full(".snippet"))
+		object packageArgument extends PackageArgument("snippetpack") with Default with Value {
+		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".snippet"))
 		}
-		Argument("name") :: packageArgument ::  Nil
+		Argument("snippetName") :: packageArgument ::  Nil
 	}
 	
 	def files = {
 	  val templatePath = "%s/snippet.ssp".format(GlobalConfiguration.rootResources)
-	  val snippetPath = "src/main/scala/${pack}/${name}.scala"
+	  val snippetPath = "src/main/scala/${snippetpack}/${snippetName}.scala"
 	  TemplateFile(templatePath,snippetPath) :: Nil
 	}
 }
@@ -37,13 +43,13 @@ object MapperTemplate extends DefaultLiftTemplate {
 	def description = "Creates a model class using Mapper"
 	
 	override def notice(argResults: List[ArgumentResult]) = 
-	  Full(replaceVariablesInPath("Remember to add ${name} to the Schemifier in your boot.scala file", argResults))
+	  Full(replaceVariablesInPath("Remember to add ${modelName} to the Schemifier in your boot.scala file", argResults))
 		
 	def arguments = {
-		object packageArgument extends PackageArgument("pack") with Default with Value {
+		object packageArgument extends PackageArgument("modelpack") with Default with Value {
 		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".model"))
 		}
-		object nameArgument extends Argument("name")
+		object nameArgument extends Argument("modelName")
 		object fieldArgument extends Argument("fields") with Repeatable with Optional
   	
   	nameArgument :: packageArgument :: fieldArgument :: Nil
@@ -51,7 +57,7 @@ object MapperTemplate extends DefaultLiftTemplate {
 	
   def files = {
     val templatePath = "%s/mapper.ssp".format(GlobalConfiguration.rootResources)
-    val mapperPath = "src/main/scala/${pack}/${name}.scala"
+    val mapperPath = "src/main/scala/${modelpack}/${modelName}.scala"
     TemplateFile(templatePath,mapperPath) :: Nil
   }
 }
@@ -63,18 +69,18 @@ object CometTemplate extends DefaultLiftTemplate {
 	def description = "Creates a comet component"
 	
 	override def notice(argResults: List[ArgumentResult]) = 
-	  Full(replaceVariablesInPath("Add <lift:comet type='${name}' /> in a template file to use the comet component", argResults))
+	  Full(replaceVariablesInPath("Add <lift:comet type='${cometName}' /> in a template file to use the comet component", argResults))
 	
 	def arguments = {
-		object packageArgument extends PackageArgument("pack") with Default with Value {
+		object packageArgument extends PackageArgument("cometpack") with Default with Value {
 		  value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".comet"))
 		}
-		Argument("name") :: packageArgument ::  Nil
+		Argument("cometName") :: packageArgument ::  Nil
 	}
 	
 	def files = {
 	  val templatePath = "%s/comet.ssp".format(GlobalConfiguration.rootResources)
-	  val snippetPath = "src/main/scala/${pack}/${name}.scala"
+	  val snippetPath = "src/main/scala/${cometpack}/${cometName}.scala"
 	  TemplateFile(templatePath,snippetPath) :: Nil
 	}
 	
@@ -94,10 +100,10 @@ object UserTemplate extends DefaultLiftTemplate {
   
   def files = TemplateFile(
     "%s/user.ssp".format(GlobalConfiguration.rootResources),
-    "src/main/scala/${pack}/User.scala"
+    "src/main/scala/${modelpack}/User.scala"
   ) :: Nil
   
-  object pack extends PackageArgument("pack") with Default with Value { 
+  object pack extends PackageArgument("modelpack") with Default with Value { 
     value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".model"))
   }
 }
@@ -115,11 +121,11 @@ object DependencyFactory extends DefaultLiftTemplate {
   
   def files = TemplateFile(
     "%s/dependencyFactory.ssp".format(GlobalConfiguration.rootResources),
-    "src/main/scala/${pack}/DependencyFactory.scala"
+    "src/main/scala/${libpack}/DependencyFactory.scala"
   ) :: Nil
   
-  object pack extends PackageArgument("pack") with Default with Value { 
-    value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".model"))
+  object pack extends PackageArgument("libpack") with Default with Value { 
+    value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".lib"))
   }
   
 }
@@ -143,7 +149,7 @@ object BlankLiftProject extends DefaultLiftTemplate {
     TemplateFile("%s/web.xml".format(blankProjectPath),"src/main/webapp/WEB-INF/web.xml") :: 
     TemplateFile("%s/index-blank.html".format(blankProjectPath),"src/main/webapp/index.html") :: 
 		TemplateFile("%s/boot.ssp".format(blankProjectPath),"src/main/scala/bootstrap/liftweb/Boot.scala") :: 
-		TemplateFile("%s/AppTest.ssp".format(blankProjectPath),"src/test/scala/${pack}/AppTest.scala") :: 
+		TemplateFile("%s/AppTest.ssp".format(blankProjectPath),"src/test/scala/${mainpack}/AppTest.scala") :: 
 		Nil
 	}
   
@@ -151,13 +157,7 @@ object BlankLiftProject extends DefaultLiftTemplate {
     createFolderStructure(arguments)(LiftHelper.liftFolderStructure :_*)    
   }
   
-  object pack extends PackageArgument("pack") with Default with Value { value = defaultMainPackage }
-  
-  lazy val defaultMainPackage = searchForMainPackage match {
-	  case Full(packageName) => Full(packageName)
-    case Empty => Empty
-    case Failure(msg,_,_) => Failure(msg)
-  }
+  object pack extends PackageArgument("mainpack") with Default with Value { value = defaultMainPackage }
   
 }
 
@@ -180,20 +180,15 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 		val basicProjectPath = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)	
 		TemplateFile("%s/ProjectDefinition.scala".format(basicProjectPath),"project/build/Project.scala") :: 
 		TemplateFile("%s/index-static.html".format(basicProjectPath),"src/main/webapp/static/index.html") :: 
-		TemplateFile("%s/index-basic .html".format(basicProjectPath),"src/main/webapp/index.html") :: 
+		TemplateFile("%s/index-basic.html".format(basicProjectPath),"src/main/webapp/index.html") :: 
 		TemplateFile("%s/boot.ssp".format(basicProjectPath),"src/main/scala/bootstrap/liftweb/Boot.scala") :: 
-		TemplateFile("%s/helloworld.ssp".format(basicProjectPath),"src/main/scala/${pack}/snippet/HelloWorld.scala") :: 
-		TemplateFile("%s/HelloWorldTest.ssp".format(basicProjectPath),"src/test/scala/${pack}/snippet/HelloWorldTest.scala") :: 
+		TemplateFile("%s/helloworld.ssp".format(basicProjectPath),"src/main/scala/${mainpack}/snippet/HelloWorld.scala") :: 
+		TemplateFile("%s/HelloWorldTest.ssp".format(basicProjectPath),"src/test/scala/${mainpack}/snippet/HelloWorldTest.scala") :: 
 		Nil
 	}
 	
 	// stuff to keep it dry
 	
-	object mainPackage extends PackageArgument("pack") with Default with Value { value = defaultMainPackage }
-	
-	lazy val defaultMainPackage = searchForMainPackage match {
-	  case Full(packageName) => Full(packageName)
-    case Empty => Empty
-    case Failure(msg,_,_) => Failure(msg)
-  }
+	object mainPackage extends PackageArgument("mainpack") with Default with Value { value = defaultMainPackage }
+
 }

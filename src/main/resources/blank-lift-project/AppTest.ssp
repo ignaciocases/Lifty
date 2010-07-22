@@ -1,6 +1,6 @@
-<%@ var pack:String %>
+<%@ var mainpack:String %>
 
-package ${pack} {
+package ${mainpack} {
 
 import _root_.java.io.File
 import _root_.junit.framework._

@@ -1,6 +1,6 @@
-<%@ var pack:String %>
+<%@ var mainpack:String %>
 
-package ${pack} {
+package ${mainpack} {
 package snippet {
 
 import org.specs._

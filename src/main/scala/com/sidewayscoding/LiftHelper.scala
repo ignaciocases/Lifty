@@ -13,12 +13,12 @@ object LiftHelper {
     "src/main/scala",
     "src/main/scala/bootstrap",
     "src/main/scala/bootstrap/liftweb",
-    "src/main/scala/${pack}",
-    "src/main/scala/${pack}/comet",
-    "src/main/scala/${pack}/lib",
-    "src/main/scala/${pack}/model",
-    "src/main/scala/${pack}/snippet",
-    "src/main/scala/${pack}/view",
+    "src/main/scala/${mainpack}",
+    "src/main/scala/${mainpack}/comet",
+    "src/main/scala/${mainpack}/lib",
+    "src/main/scala/${mainpack}/model",
+    "src/main/scala/${mainpack}/snippet",
+    "src/main/scala/${mainpack}/view",
     "src/main/webapp",
     "src/main/webapp/images",
     "src/main/webapp/templates-hidden",
@@ -35,7 +35,8 @@ object LiftHelper {
   }
   
   /**
-  * Searches for the main package used for the app in the Boot.scala class
+  * Searches for the main package used for the app in the Boot.scala class. If 
+  * the boot file doesn't exist it will search the properties file
   * 
   * @return A box with the string, if successfull. 
   */
@@ -47,13 +48,16 @@ object LiftHelper {
       val in = scala.io.Source.fromInputStream(is)
       in.getLines.filter( _.contains("LiftRules.addToPackages")).toList match {
         case head :: rest => regex.findFirstMatchIn(head) match {
-          case Some(m) => Full(m.group(1) + append.openOr("") )
+          case Some(m) => Full(m.group(1) + append.openOr(""))
           case None => Failure("Regxp search in boot failed")
         }
         case Nil => Failure("No lines contained LiftRules.addToPackages")
       }
     } else {
-      Failure("The file %s does not exist".format(pathToBoot))
+      searchForMainPackage match {
+        case Full(str) => Full(str + append.openOr(""))
+        case _ => Empty
+      }
     }
   }
   

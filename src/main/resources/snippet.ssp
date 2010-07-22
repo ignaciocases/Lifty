@@ -1,7 +1,7 @@
-<%@ var name:String %>
-<%@ var pack:String %>
+<%@ var snippetName:String %>
+<%@ var snippetpack:String %>
 
-package ${pack}
+package ${snippetpack}
 
 import xml.{Text, NodeSeq}
 import net.liftweb.util.Helpers._
@@ -9,7 +9,7 @@ import net.liftweb.http.S._
 import net.liftweb.http.SHtml._
 import net.liftweb.common._
 
-class ${name} {
+class ${snippetName} {
 
 	def render(xhtml: NodeSeq): NodeSeq = {
 		<strong>hello world!</strong>

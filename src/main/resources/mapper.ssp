@@ -1,20 +1,20 @@
-<%@ var name:String %>
-<%@ var pack:String %>
+<%@ var modelName:String %>
+<%@ var modelpack:String %>
 <%@ var fields:List[String] %>
 
-package ${pack}
+package ${modelpack}
 
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
 import _root_.net.liftweb.common._
 
-class ${name} extends LongKeyedMapper[${name}] with IdPK {
+class ${modelName} extends LongKeyedMapper[${modelName}] with IdPK {
 
-  def getSingleton = ${name}
+  def getSingleton = ${modelName}
 
 <% fields.foreach{ field => %>
   object ${field} extends MappedString(this,256)
 <% } %>
 
 }
-object ${name} extends ${name} with LongKeyedMetaMapper[${name}]
+object ${modelName} extends ${modelName} with LongKeyedMetaMapper[${modelName}]

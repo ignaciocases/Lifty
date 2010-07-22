@@ -1,7 +1,6 @@
-<%@ var pack:String %>
+<%@ var modelpack:String %>
 
-package ${pack} {
-package model {
+package ${modelpack} {
 
 import _root_.net.liftweb.mapper._
 import _root_.net.liftweb.util._
@@ -36,5 +35,4 @@ class User extends MegaProtoUser[User] {
   }
 }
 
-}
 }

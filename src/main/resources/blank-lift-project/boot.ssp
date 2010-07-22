@@ -1,4 +1,4 @@
-<%@ var pack:String %>
+<%@ var mainpack:String %>
 
 package bootstrap.liftweb
 
@@ -8,7 +8,7 @@ import _root_.net.liftweb.sitemap.{SiteMap,Menu}
 class Boot {
   def boot {
     // where to search snippet
-    LiftRules.addToPackages("${pack}")
+    LiftRules.addToPackages("${mainpack}")
 
     // build sitemap
     val entries = List(Menu("Home") / "index")

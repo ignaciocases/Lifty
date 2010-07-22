@@ -93,7 +93,7 @@ object UserTemplate extends DefaultLiftTemplate {
   def arguments = pack :: Nil
   
   def files = TemplateFile(
-    "%s/basic-lift-project/user.ssp".format(GlobalConfiguration.rootResources),
+    "%s/user.ssp".format(GlobalConfiguration.rootResources),
     "src/main/scala/${pack}/User.scala"
   ) :: Nil
   
@@ -114,7 +114,7 @@ object DependencyFactory extends DefaultLiftTemplate {
   def arguments = pack :: Nil
   
   def files = TemplateFile(
-    "%s/basic-lift-project/dependencyFactory.ssp".format(GlobalConfiguration.rootResources),
+    "%s/dependencyFactory.ssp".format(GlobalConfiguration.rootResources),
     "src/main/scala/${pack}/DependencyFactory.scala"
   ) :: Nil
   

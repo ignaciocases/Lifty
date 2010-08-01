@@ -140,14 +140,14 @@ object BlankLiftProject extends DefaultLiftTemplate {
   
   def files = {
     val blankProjectPath = "%s/blank-lift-project".format(GlobalConfiguration.rootResources)
-    TemplateFile("%s/ProjectDefinition.scala".format(blankProjectPath),"project/build/Project.scala") ::
+    TemplateFile("%s/ProjectDefinition.ssp".format(blankProjectPath),"project/build/Project.scala") ::
     TemplateFile("%s/LiftConsole.scala".format(blankProjectPath),"src/test/scala/LiftConsole.scala") :: 
 		TemplateFile("%s/RunWebApp.scala".format(blankProjectPath),"src/test/scala/RunWebApp.scala") :: 
 		TemplateFile("%s/default.props".format(blankProjectPath),"src/main/resources/props/default.props") ::
     TemplateFile("%s/default.html".format(blankProjectPath),"src/main/webapp/templates-hidden/default.html") ::
     TemplateFile("%s/wizard-all.html".format(blankProjectPath),"src/main/webapp/templates-hidden/wizard-all.html") :: 
     TemplateFile("%s/web.xml".format(blankProjectPath),"src/main/webapp/WEB-INF/web.xml") :: 
-    TemplateFile("%s/index-blank.html".format(blankProjectPath),"src/main/webapp/index.html") :: 
+    TemplateFile("%s/index.ssp".format(blankProjectPath),"src/main/webapp/index.html") :: 
 		TemplateFile("%s/boot.ssp".format(blankProjectPath),"src/main/scala/bootstrap/liftweb/Boot.scala") :: 
 		TemplateFile("%s/AppTest.ssp".format(blankProjectPath),"src/test/scala/${mainpack}/AppTest.scala") :: 
 		Nil
@@ -178,10 +178,7 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	val basicProjectPath = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)	
 	
 	def files = {
-		//TemplateFile("%s/ProjectDefinition.scala".format(basicProjectPath),"project/build/Project.scala") :: 
 		TemplateFile("%s/index-static.html".format(basicProjectPath),"src/main/webapp/static/index.html") :: 
-		TemplateFile("%s/index-basic.html".format(basicProjectPath),"src/main/webapp/index.html") :: 
-		//TemplateFile("%s/boot.ssp".format(basicProjectPath),"src/main/scala/bootstrap/liftweb/Boot.scala") :: 
 		TemplateFile("%s/helloworld.ssp".format(basicProjectPath),"src/main/scala/${mainpack}/snippet/HelloWorld.scala") :: 
 		TemplateFile("%s/HelloWorldTest.ssp".format(basicProjectPath),"src/test/scala/${mainpack}/snippet/HelloWorldTest.scala") :: 
 		Nil
@@ -190,8 +187,9 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	injectContentsOfFile("%s/boot_import_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("imports")
 	injectContentsOfFile("%s/boot_top_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("top")
 	injectContentsOfFile("%s/boot_bottom_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("bottom")
-	
-	// stuff to keep it dry
+	injectContentsOfFile("%s/boot_sitemap_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("sitemap")
+	injectContentsOfFile("%s/index_content_injections.ssp".format(basicProjectPath)) into("index.ssp") at("content")
+	injectContentsOfFile("%s/ProjectDefinition_dependencies_injections.ssp".format(basicProjectPath)) into("ProjectDefinition.ssp") at("dependencies")	
 	
 	object mainPackage extends PackageArgument("mainpack") with Default with Value { value = defaultMainPackage }
 

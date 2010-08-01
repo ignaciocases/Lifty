@@ -3,7 +3,7 @@
 package bootstrap.liftweb
 
 import _root_.net.liftweb.http.{LiftRules}
-import _root_.net.liftweb.sitemap.{SiteMap,Menu}
+import _root_.net.liftweb.sitemap.{SiteMap, Menu, Loc}
 //#inject point: imports
 
 
@@ -16,7 +16,10 @@ class Boot {
     LiftRules.addToPackages("${mainpack}")
 
     // build sitemap
-    val entries = List(Menu("Home") / "index")
+    val entries = List(Menu("Home") / "index") :::
+                  //#inject point: sitemap
+                  Nil
+                  
     LiftRules.setSiteMap(SiteMap(entries:_*))
 
     // set character encoding

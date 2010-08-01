@@ -1,5 +1,7 @@
 <lift:surround with="default" at="content">
   <h2>Welcome to your project!</h2>
 
+  //#inject point: content
+
 </lift:surround>
 

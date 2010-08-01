@@ -4,9 +4,14 @@ package bootstrap.liftweb
 
 import _root_.net.liftweb.http.{LiftRules}
 import _root_.net.liftweb.sitemap.{SiteMap,Menu}
+//#inject point: imports
+
 
 class Boot {
   def boot {
+  
+    //#inject point: top
+  
     // where to search snippet
     LiftRules.addToPackages("${mainpack}")
 
@@ -16,5 +21,8 @@ class Boot {
 
     // set character encoding
     LiftRules.early.append(_.setCharacterEncoding("UTF-8"))
+    
+    //#inject point: bottom
+    
   }
 }

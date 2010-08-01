@@ -175,17 +175,21 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 		createFolderStructure(arguments)(LiftHelper.liftFolderStructure :_*)
 	}
 	
+	val basicProjectPath = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)	
 	
 	def files = {
-		val basicProjectPath = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)	
-		TemplateFile("%s/ProjectDefinition.scala".format(basicProjectPath),"project/build/Project.scala") :: 
+		//TemplateFile("%s/ProjectDefinition.scala".format(basicProjectPath),"project/build/Project.scala") :: 
 		TemplateFile("%s/index-static.html".format(basicProjectPath),"src/main/webapp/static/index.html") :: 
 		TemplateFile("%s/index-basic.html".format(basicProjectPath),"src/main/webapp/index.html") :: 
-		TemplateFile("%s/boot.ssp".format(basicProjectPath),"src/main/scala/bootstrap/liftweb/Boot.scala") :: 
+		//TemplateFile("%s/boot.ssp".format(basicProjectPath),"src/main/scala/bootstrap/liftweb/Boot.scala") :: 
 		TemplateFile("%s/helloworld.ssp".format(basicProjectPath),"src/main/scala/${mainpack}/snippet/HelloWorld.scala") :: 
 		TemplateFile("%s/HelloWorldTest.ssp".format(basicProjectPath),"src/test/scala/${mainpack}/snippet/HelloWorldTest.scala") :: 
 		Nil
 	}
+	
+	injectContentsOfFile("%s/boot_import_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("imports")
+	injectContentsOfFile("%s/boot_top_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("top")
+	injectContentsOfFile("%s/boot_bottom_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("bottom")
 	
 	// stuff to keep it dry
 	

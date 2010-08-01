@@ -1,11 +1,8 @@
 package com.sidewayscoding
 
-import LiftHelper._
 import sbt._
 import sbt.processor.BasicProcessor
-
 import template.engine._
-import template.util.TemplateHelper._
 import net.liftweb.common._
 
 /**

@@ -1,3 +1,1 @@
-    "net.liftweb" %% "lift-mapper" % liftVersion % "compile->default",
     "net.liftweb" %% "lift-wizard" % liftVersion % "compile->default",
-    "com.h2database" % "h2" % "1.2.138",

@@ -1,0 +1,6 @@
+<%@ var mainpack:String %>
+import _root_.net.liftweb.mapper.{Schemifier, DB, StandardDBVendor, DefaultConnectionIdentifier}
+import _root_.net.liftweb.util.{Props}
+import _root_.net.liftweb.common.{Full}
+import _root_.net.liftweb.http.{S}
+import ${mainpack}.model._

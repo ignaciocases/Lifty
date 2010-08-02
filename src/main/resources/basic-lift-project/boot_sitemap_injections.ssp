@@ -1,4 +1,2 @@
                   List(Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
                        "Static Content"))) :::
-                  // the User management menu items
-                  User.sitemap :::

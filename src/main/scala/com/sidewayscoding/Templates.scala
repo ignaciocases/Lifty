@@ -98,10 +98,18 @@ object UserTemplate extends DefaultLiftTemplate {
   
   def arguments = pack :: Nil
   
+  val path = "%s/user".format(GlobalConfiguration.rootResources)	
+  
   def files = TemplateFile(
-    "%s/user.ssp".format(GlobalConfiguration.rootResources),
+    "%s/user.ssp".format(path),
     "src/main/scala/${modelpack}/User.scala"
   ) :: Nil
+  
+  injectContentsOfFile("%s/boot_import_injections_user.ssp".format(path)) into("boot.ssp") at("imports")
+  injectContentsOfFile("%s/boot_sitemap_injections_user.ssp".format(path)) into("boot.ssp") at("sitemap")
+  injectContentsOfFile("%s/ProjectDefinition_dependencies_injections_user.ssp".format(path)) into("ProjectDefinition.ssp") at("dependencies")	
+  injectContentsOfFile("%s/boot_bottom_injections_user.ssp".format(path)) into("boot.ssp") at("bottom")
+  injectContentsOfFile("%s/boot_top_injections_user.ssp".format(path)) into("boot.ssp") at("top")
   
   object pack extends PackageArgument("modelpack") with Default with Value { 
     value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".model"))
@@ -175,21 +183,20 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 		createFolderStructure(arguments)(LiftHelper.liftFolderStructure :_*)
 	}
 	
-	val basicProjectPath = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)	
+	val path = "%s/basic-lift-project".format(GlobalConfiguration.rootResources)	
 	
 	def files = {
-		TemplateFile("%s/index-static.html".format(basicProjectPath),"src/main/webapp/static/index.html") :: 
-		TemplateFile("%s/helloworld.ssp".format(basicProjectPath),"src/main/scala/${mainpack}/snippet/HelloWorld.scala") :: 
-		TemplateFile("%s/HelloWorldTest.ssp".format(basicProjectPath),"src/test/scala/${mainpack}/snippet/HelloWorldTest.scala") :: 
+		TemplateFile("%s/index-static.html".format(path),"src/main/webapp/static/index.html") :: 
+		TemplateFile("%s/helloworld.ssp".format(path),"src/main/scala/${mainpack}/snippet/HelloWorld.scala") :: 
+		TemplateFile("%s/HelloWorldTest.ssp".format(path),"src/test/scala/${mainpack}/snippet/HelloWorldTest.scala") :: 
 		Nil
 	}
 	
-	injectContentsOfFile("%s/boot_import_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("imports")
-	injectContentsOfFile("%s/boot_top_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("top")
-	injectContentsOfFile("%s/boot_bottom_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("bottom")
-	injectContentsOfFile("%s/boot_sitemap_injections.ssp".format(basicProjectPath)) into("boot.ssp") at("sitemap")
-	injectContentsOfFile("%s/index_content_injections.ssp".format(basicProjectPath)) into("index.ssp") at("content")
-	injectContentsOfFile("%s/ProjectDefinition_dependencies_injections.ssp".format(basicProjectPath)) into("ProjectDefinition.ssp") at("dependencies")	
+	injectContentsOfFile("%s/boot_import_injections.ssp".format(path)) into("boot.ssp") at("imports")
+	injectContentsOfFile("%s/boot_bottom_injections.ssp".format(path)) into("boot.ssp") at("bottom")
+	injectContentsOfFile("%s/boot_sitemap_injections.ssp".format(path)) into("boot.ssp") at("sitemap")
+	injectContentsOfFile("%s/index_content_injections.ssp".format(path)) into("index.ssp") at("content")
+	injectContentsOfFile("%s/ProjectDefinition_dependencies_injections.ssp".format(path)) into("ProjectDefinition.ssp") at("dependencies")	
 	
 	object mainPackage extends PackageArgument("mainpack") with Default with Value { value = defaultMainPackage }
 

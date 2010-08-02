@@ -86,15 +86,29 @@ object CometTemplate extends DefaultLiftTemplate {
 	
 }
 
+object Layout extends DefaultLiftTemplate {
+  
+  def name = "layout"
+  
+  def description = "Creates an empty layout with a surround tag"
+  
+  def arguments = Argument("layoutName") :: Nil
+  
+  def files = TemplateFile(
+    "%s/layout.ssp".format(GlobalConfiguration.rootResources),
+    "src/main/webapp/${layoutName}.html"
+  ) :: Nil   
+}
+
 /**
-* Tempalte for a model class implemented using Mapper. It provides basic functionality
+* Template for a model class implemented using Mapper. It provides basic functionality
 * that would expect from a User.
 */
 object UserTemplate extends DefaultLiftTemplate {
   
   def name = "user"
   
-  def description = "Tempalte for a model class implemented using Mapper. It provides basic functionality that would expect from a User"
+  def description = "Template for a model class implemented using Mapper. It provides basic functionality that would expect from a User"
   
   def arguments = pack :: Nil
   

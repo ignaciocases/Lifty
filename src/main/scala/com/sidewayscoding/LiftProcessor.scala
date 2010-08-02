@@ -15,6 +15,7 @@ class LiftProcessor extends SBTTemplateProcessor {
 	  SnippetTemplate,
 	  MapperTemplate,
 	  CometTemplate,
+	  Layout,
 	  LiftProjectTemplate,
 	  BlankLiftProject,
 	  UserTemplate,

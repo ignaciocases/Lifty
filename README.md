@@ -1,23 +1,20 @@
 SBT Sample Processor
 ====================
 
-This is a blank SBT processor project. All it does it print the arguments to the console but it should help you get started with your processor.
+This is a [SBT processor](http://code.google.com/p/simple-build-tool/wiki/Processors "SBT processor") for generating files associated with the Lift framework. This was developed as part of my Google Summer of Code 2010 project. It's using a framework that I created, see: [Simple-Build-Tool-Template-Engine](http://github.com/mads379/Simple-Build-Tool-Template-Engine "Simple-Build-Tool-Template-Engine").
 
-To get started simple clone the repository: 
--------------------------------------------
+For more information check out it's [Github page](http://mads379.github.com/Lift-sbt-processor/ "Github page").
 
-<pre><code>git clone git://github.com/mads379/Sample-SBT-Processor.git
-cd Sample-SBT-Processor	
-sbt</code></pre>
+If you want to try out the processor start SBT and run the following
 
-Once SBT has started run the following commands in the SBT console
-
-<pre><code>publish-local
-*someName is com.sidewayscoding sample_sbt_processor 1.0
+<pre><code>*ScalaToolsSnapshot at http://scala-tools.org/repo-snapshots/
+*lift is com.sidewayscoding lift_processor 1.1
 </code></pre>
 
-Now you can run the processor as you would any other command
+If you want to build it locally simply run the following (SBT is needed)
 
-<pre><code>someName test test lolcats</code></pre>
-
-For more information about processor check out the SBT wiki: http://code.google.com/p/simple-build-tool/wiki/Processors
+<pre><code>git clone git@github.com:mads379/Lift-sbt-processor.git
+cd Lift-sbt-processor
+sbt
+update
+compile</code></pre>

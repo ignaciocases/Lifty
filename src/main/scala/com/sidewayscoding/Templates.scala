@@ -123,7 +123,7 @@ object UserTemplate extends DefaultLiftTemplate {
   injectContentsOfFile("%s/boot_sitemap_injections_user.txt".format(path)) into("boot.ssp") at("sitemap")
   injectContentsOfFile("%s/boot_bottom_injections_user.txt".format(path)) into("boot.ssp") at("bottom")
   injectContentsOfFile("%s/boot_top_injections_user.txt".format(path)) into("boot.ssp") at("top")
-  injectContentsOfFile("%s/ProjectDefinition_dependencies_injections_user.txt".format(path)) into("ProjectDefinition.ssp") at("dependencies")	
+  injectContentsOfFile("%s/ProjectDefinition_dependencies_injections_user.txt".format(path)) into("Project.ssp") at("dependencies")	
   
   object pack extends PackageArgument("modelpack") with Default with Value { 
     value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".model"))
@@ -162,7 +162,7 @@ object BlankLiftProject extends DefaultLiftTemplate {
   
   def files = {
     val blankProjectPath = "%s/blank-lift-project".format(GlobalConfiguration.rootResources)
-    TemplateFile("%s/ProjectDefinition.ssp".format(blankProjectPath),"project/build/Project.scala") ::
+    TemplateFile("%s/Project.ssp".format(blankProjectPath),"project/build/Project.scala") ::
     TemplateFile("%s/LiftConsole.scala".format(blankProjectPath),"src/test/scala/LiftConsole.scala") :: 
 		TemplateFile("%s/RunWebApp.scala".format(blankProjectPath),"src/test/scala/RunWebApp.scala") :: 
 		TemplateFile("%s/default.props".format(blankProjectPath),"src/main/resources/props/default.props") ::
@@ -210,7 +210,7 @@ object LiftProjectTemplate extends DefaultLiftTemplate {
 	injectContentsOfFile("%s/boot_bottom_injections.ssp".format(path)) into("boot.ssp") at("bottom")
 	injectContentsOfFile("%s/boot_sitemap_injections.ssp".format(path)) into("boot.ssp") at("sitemap")
 	injectContentsOfFile("%s/index_content_injections.ssp".format(path)) into("index.ssp") at("content")
-	injectContentsOfFile("%s/ProjectDefinition_dependencies_injections.ssp".format(path)) into("ProjectDefinition.ssp") at("dependencies")	
+	injectContentsOfFile("%s/ProjectDefinition_dependencies_injections.ssp".format(path)) into("Project.ssp") at("dependencies")	
 	
 	object mainPackage extends PackageArgument("mainpack") with Default with Value { value = defaultMainPackage }
 

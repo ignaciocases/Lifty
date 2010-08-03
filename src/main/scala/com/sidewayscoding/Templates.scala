@@ -120,10 +120,10 @@ object UserTemplate extends DefaultLiftTemplate {
   ) :: Nil
   
   injectContentsOfFile("%s/boot_import_injections_user.ssp".format(path)) into("boot.ssp") at("imports")
-  injectContentsOfFile("%s/boot_sitemap_injections_user.ssp".format(path)) into("boot.ssp") at("sitemap")
-  injectContentsOfFile("%s/ProjectDefinition_dependencies_injections_user.ssp".format(path)) into("ProjectDefinition.ssp") at("dependencies")	
-  injectContentsOfFile("%s/boot_bottom_injections_user.ssp".format(path)) into("boot.ssp") at("bottom")
-  injectContentsOfFile("%s/boot_top_injections_user.ssp".format(path)) into("boot.ssp") at("top")
+  injectContentsOfFile("%s/boot_sitemap_injections_user.txt".format(path)) into("boot.ssp") at("sitemap")
+  injectContentsOfFile("%s/boot_bottom_injections_user.txt".format(path)) into("boot.ssp") at("bottom")
+  injectContentsOfFile("%s/boot_top_injections_user.txt".format(path)) into("boot.ssp") at("top")
+  injectContentsOfFile("%s/ProjectDefinition_dependencies_injections_user.txt".format(path)) into("ProjectDefinition.ssp") at("dependencies")	
   
   object pack extends PackageArgument("modelpack") with Default with Value { 
     value = searchForPackageInBoot("src/main/scala/bootstrap/liftweb/Boot.scala",Full(".model"))

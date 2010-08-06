@@ -1,7 +1,5 @@
 Lifty
 =====
-What is it?
-===========
 
 Lifty is a [SBT processor](http://code.google.com/p/simple-build-tool/wiki/Processors "SBT processor") for generating files associated with the Lift framework. This was developed as part of my Google Summer of Code 2010 project. It's using a framework that I created, see: [Lifty Engine](http://github.com/mads379/Lifty-engine "Lifty Engine").
 

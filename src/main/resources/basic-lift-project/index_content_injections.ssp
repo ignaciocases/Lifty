@@ -1,5 +1,0 @@
-    <p>
-      <lift:helloWorld.howdy>
-        <span>Welcome to app at <b:time/></span>
-      </lift:helloWorld.howdy>
-    </p>

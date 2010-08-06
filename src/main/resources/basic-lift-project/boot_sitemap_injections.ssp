@@ -1,2 +1,0 @@
-                  List(Menu(Loc("Static", Link(List("static"), true, "/static/index"), 
-                       "Static Content"))) :::

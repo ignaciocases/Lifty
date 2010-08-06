@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+	<title>mads379/Lifty @ GitHub</title>
+	
+	<style type="text/css">
+		body {
+  		margin-top: 1.0em;
+  		background-color: #ffffff;
+		  font-family: "Helvetica,Arial,FreeSans";
+  		color: #000000;
+    }
+    #container {
+      margin: 0 auto;
+      width: 800px;
+    }
+		h1 { font-size: 3.8em; color: #000000; margin-bottom: 3px; }
+		h1 .small { font-size: 0.4em; }
+		h1 a { text-decoration: none }
+		h2 { font-size: 1.5em; color: #000000; }
+    h3 { text-align: left; color: #000000; }
+    a { color: #000000; }
+    .download { float: right; }
+		pre { background: #000; color: #fff; padding: 15px;}
+    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
+    .footer { text-align:center; padding-top:30px; font-style: italic; }
+    #showcase {
+      border: 2px solid #646464;
+      margin: 20px 0px 0px 0px;
+    }
+	</style>
+	
+</head>
+
+<body>
+  <a href="http://github.com/mads379/Lifty"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+  <div id="container">
+    
+    <h1><a href="http://github.com/mads379/Lifty">Lifty</a></h1>
+    <ul>
+      <li><a href="#authors">Authors</a></li>
+      <li><a href="#description">Description</a></li>  
+      <li><a href="#using_it">Using it</a></li>    
+        <ul>
+          <li><a href="#commands">Commands</li>
+          <li><a href="#templates">Templates</a></li>
+        </ul>
+      <li><a href="#project_information">Project information</a></li>  
+      <li><a href="#getting_the_code">Getting the code</a></li>  
+    </ul>
+    
+    <h2 id="authors">Authors</h2>
+    <p>Mads Hartmann (mads379@gmail.com)</p>
+  
+    <h2 id="description">Description</h2>
+    <p>This is a SBT processor for generating files associated with the Lift framework. This was developed as 
+       part of my Google Summer of Code 2010 project. It's using a framework that I created, see: 
+       <a href="http://mads379.github.com/Lifty-engine" target="_blank">Lifty engine.</a>
+    </p>
+
+    <h2 id="using_it">Using it</h2>
+    <p>Fire up sbt and run the following:</p>
+    <pre><code>*ScalaToolsSnapshot at http://scala-tools.org/repo-snapshots/
+*lifty is org.lifty lifty 1.2</code></pre>
+    <p>Congratulations, you've now got a lift processor to make you more effective! You can now use the processor as you would any other SBT command.</p>
+
+    <h3 id="commands">Commands</h3>
+    <p>The processor supports the following commands:</p>
+    <ul>
+      <li><strong>help</strong>: This will list all of the available commands</li>
+      <li><strong>templates</strong>: This will list all of the available templates</li>
+      <li><strong>create</strong>: This will attempt to create on of the templates</li>
+    </ul>
+    <p>Examples:</p>
+    <p>
+      <code>lift create snippet MySnippet</code> or <br />
+      <code>lift create snippet</code> and it will request the necessary information<br />
+      <code>lift create project-blank with user</code> this will create both the project-blank and user templates (you can chain them!)<br />
+    </p>
+    <h3 id="templates">Templates</h3>
+    <p>The processor can create the following templates:</p>
+    <ul>
+      <li><strong>Snippet</strong>: A snippet</li>
+      <li><strong>Mapper</strong>: Model class using Mapper</li>
+      <li><strong>Comet</strong>: Comet component</li>
+      <li><strong>Layout</strong>: An empty layout with a surround tag</li>
+      <li><strong>Project</strong>: A Lift project with some functionality to get you started</li>
+      <li><strong>Project-blank</strong>: A blank Lift project that uses SBT as it's build system</li>
+      <li><strong>User</strong>: Model class implemented using Mapper. It provides basic functionality that would expect from a User</li>
+      <li><strong>Dependency Factory</strong>: I do not know.</li>
+    </ul>
+    
+    <h2 id="project_information">Project information</h2>
+    <p>The project is hosted on <a href="http://www.scala-tools.org" target="_blank">Scala-tools</a></p>
+    <ul>
+      <li><strong>Group</strong>: org.lifty </li>
+      <li><strong>Artifact</strong>: lifty_2.7.7</li>
+      <li><strong>Version</strong>: 1.2</li>
+    </ul>
+    
+    <h2 id="getting_the_code">Getting the code</h2>
+    <p>
+      You can download this project in either
+      <a href="http://github.com/mads379/Lifty/zipball/master">zip</a> or
+      <a href="http://github.com/mads379/Lifty/tarball/master">tar</a> formats.
+    </p>
+    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+      by running:
+      <pre>$ git clone git://github.com/mads379/Lifty</pre>
+    </p>
+
+    <div class="footer">
+      get the source code on GitHub : <a href="http://github.com/mads379/Lifty">mads379/Lifty</a>
+    </div>
+
+  </div>
+  
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-13155106-2']);
+    _gaq.push(['_setDomainName', 'none']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+  
+</body>
+</html>

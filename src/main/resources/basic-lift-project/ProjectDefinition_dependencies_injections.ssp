@@ -1,1 +1,0 @@
-    "net.liftweb" %% "lift-wizard" % liftVersion % "compile->default",

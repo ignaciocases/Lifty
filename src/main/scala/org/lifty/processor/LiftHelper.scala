@@ -1,8 +1,8 @@
-package com.sidewayscoding
+package org.lifty.processor
 
 import java.util.Properties
-import net.liftweb.common._
 import java.io._
+import net.liftweb.common._
 import scala.io.Source
 
 object LiftHelper {

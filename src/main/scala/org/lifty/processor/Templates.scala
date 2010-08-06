@@ -1,11 +1,10 @@
-package com.sidewayscoding
+package org.lifty.processor
 
-import LiftHelper._
 import sbt._
 import sbt.processor.BasicProcessor
-
-import template.engine._
-import template.util.TemplateHelper._
+import org.lifty.engine._
+import org.lifty.util.TemplateHelper._
+import org.lifty.processor.LiftHelper._
 import net.liftweb.common._
 
 trait DefaultLiftTemplate extends Template with Create with Delete{

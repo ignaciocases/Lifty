@@ -1,8 +1,8 @@
-package com.sidewayscoding.specs
+package org.lifty.processor.specs
 
 import org.scalatest.FlatSpec
 import org.scalatest.matchers.ShouldMatchers
-import com.sidewayscoding.LiftHelper
+import org.lifty.processor.LiftHelper
 
 class HelperTest extends FlatSpec with ShouldMatchers {
   

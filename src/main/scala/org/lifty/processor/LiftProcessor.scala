@@ -1,7 +1,7 @@
-package com.sidewayscoding
+package org.lifty.processor
 
 import sbt._
-import template.engine._
+import org.lifty.engine._
 
 /**
 * The lift processor. We simply give it the templates taht we want it to create

@@ -4,7 +4,7 @@ import sbt._
 import org.lifty.engine._
 
 /**
-* The lift processor. We simply give it the templates taht we want it to create
+* The lift processor. We simply give it the templates that we want it to
 * be able to create
 * 
 */

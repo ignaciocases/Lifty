@@ -64,9 +64,10 @@
     </p>
 
     <h2 id="using_it">Using it</h2>
-    <p>Fire up sbt and run the following:</p>
+    <p>Start SBT in an existing project or create a new one and type the following in the regular SBT prompt:</p>
     <pre><code>*ScalaToolsSnapshot at http://scala-tools.org/repo-snapshots/
 *lifty is org.lifty lifty 1.2</code></pre>
+    <p><strong>NB</strong>: The * (asterisk) is important, it tells SBT that it's a processor-related command. In the first line you're adding a repository and in the second you're declaring a processor. The first argument "lifty" is the name of the processor. You can pick any name you like. You will use this name to run the processor in the future.</p>
     <p>Congratulations, you've now got a lift processor to make you more effective! You can now use the processor as you would any other SBT command.</p>
 
     <h3 id="commands">Commands</h3>

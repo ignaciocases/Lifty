@@ -166,6 +166,7 @@ object BlankLiftProject extends DefaultLiftTemplate {
 		TemplateFile("%s/RunWebApp.scala".format(blankProjectPath),"src/test/scala/RunWebApp.scala") :: 
 		TemplateFile("%s/default.props".format(blankProjectPath),"src/main/resources/props/default.props") ::
     TemplateFile("%s/default.html".format(blankProjectPath),"src/main/webapp/templates-hidden/default.html") ::
+    TemplateFile("%s/404.html".format(blankProjectPath),"src/main/webapp/404.html") :: 
     TemplateFile("%s/wizard-all.html".format(blankProjectPath),"src/main/webapp/templates-hidden/wizard-all.html") :: 
     TemplateFile("%s/web.xml".format(blankProjectPath),"src/main/webapp/WEB-INF/web.xml") :: 
     TemplateFile("%s/index.ssp".format(blankProjectPath),"src/main/webapp/index.html") :: 

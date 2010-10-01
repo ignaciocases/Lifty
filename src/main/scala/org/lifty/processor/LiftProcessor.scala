@@ -8,6 +8,7 @@ import org.lifty.engine._
 * be able to create
 * 
 */
+
 class LiftProcessor extends SBTTemplateProcessor {
 	def templates = List(
 	  SnippetTemplate,

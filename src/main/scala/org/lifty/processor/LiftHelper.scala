@@ -38,7 +38,7 @@ object LiftHelper {
   * Searches for the main package used for the app in the Boot.scala class. If 
   * the boot file doesn't exist it will search the properties file
   * 
-  * @return A box with the string, if successfull. 
+  * @return A box with the string, if successful. 
   */
   def searchForPackageInBoot(pathToBoot: String, append: Box[String]): Box[String] = {
     val regex = """\("(\S*)"\)""".r

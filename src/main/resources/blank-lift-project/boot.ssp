@@ -2,8 +2,9 @@
 
 package bootstrap.liftweb
 
-import _root_.net.liftweb.http.{LiftRules}
+import _root_.net.liftweb.http.{LiftRules, NotFoundAsTemplate, ParsePath}
 import _root_.net.liftweb.sitemap.{SiteMap, Menu, Loc}
+import _root_.net.liftweb.util.{ NamedPF }
 //#inject point: imports
 
 

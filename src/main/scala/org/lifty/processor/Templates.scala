@@ -7,6 +7,12 @@ import org.lifty.util.TemplateHelper._
 import org.lifty.processor.LiftHelper._
 import net.liftweb.common._
 
+object CONSTANTS
+{
+  val LIFTVERSION = "2.1-SNAPSHOT"
+}
+
+
 trait DefaultLiftTemplate extends Template with Create with Delete{
   lazy val defaultMainPackage = searchForMainPackage match {
 	  case Full(packageName) => Full(packageName)
@@ -157,7 +163,7 @@ object BlankLiftProject extends DefaultLiftTemplate {
   
   def description = "Creates a blank Lift project that uses SBT as it's build system"
   
-  def arguments = pack :: Nil
+  def arguments = pack :: liftversion :: Nil
   
   def files = {
     val blankProjectPath = "%s/blank-lift-project".format(GlobalConfiguration.rootResources)
@@ -179,6 +185,7 @@ object BlankLiftProject extends DefaultLiftTemplate {
     createFolderStructure(arguments)(LiftHelper.liftFolderStructure :_*)    
   }
   
+  object liftversion extends Argument("liftversion") with Default with Value { value = Full(CONSTANTS.LIFTVERSION) }
   object pack extends PackageArgument("mainpack") with Default with Value { value = defaultMainPackage }
   
 }

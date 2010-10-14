@@ -12,8 +12,7 @@ How do I use it?
 
 If you want to try out the processor start SBT and run the following
 
-<pre><code>*ScalaToolsSnapshot at http://scala-tools.org/repo-snapshots/
-*lifty is org.lifty lifty 1.2
+<pre><code>*lifty is org.lifty lifty 1.3
 </code></pre>
 
 If you want to build it locally simply run the following (SBT is needed)

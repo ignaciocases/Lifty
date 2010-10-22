@@ -12,8 +12,6 @@ class Project(info: ProjectInfo) extends ProcessorProject(info) with AssemblyPro
   val publishTo = "Scala Tools Nexus" at "http://nexus.scala-tools.org/content/repositories/snapshots/"
   Credentials(Path.userHome / "dev" / ".nexus_credentials", log)
 
-  override val artifactID = "lifty"
-
   override def mainClass: Option[String] = Some("org.lifty.processor.LiftyStandAlone")
 }
 
@@ -21,7 +19,9 @@ class Project(info: ProjectInfo) extends ProcessorProject(info) with AssemblyPro
  * This has pretty much been copied from N8hans repository:
  * http://github.com/n8han/ants/blob/master/project/build/AntsProject.scala
  */
-trait AssemblyProject { this: ProcessorProject =>
+trait AssemblyProject { 
+  
+  this: ProcessorProject =>
 
   def assemblyExclude(base: PathFinder) = base / "META-INF" ** "*"
   def assemblyOutputPath = outputPath / assemblyJarName

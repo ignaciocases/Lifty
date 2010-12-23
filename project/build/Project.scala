@@ -9,7 +9,7 @@ class Project(info: ProjectInfo) extends ProcessorProject(info) with AssemblyPro
   val scalatest = "org.scalatest" % "scalatest" % "1.0" % "test"
 
   override def managedStyle = ManagedStyle.Maven
-  val publishTo = "Scala Tools Nexus" at "http://nexus.scala-tools.org/content/repositories/releases/"
+  val publishTo = "Scala Tools Nexus" at "http://nexus.scala-tools.org/content/repositories/snapshots/"
   Credentials(Path.userHome / "dev" / ".nexus_credentials", log)
 
   override def mainClass: Option[String] = Some("org.lifty.processor.LiftyStandAlone")

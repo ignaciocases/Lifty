@@ -8,7 +8,7 @@ import org.lifty.processor.LiftHelper._
 import net.liftweb.common._
 
 object CONSTANTS {
-  val LIFTVERSION = "2.1-SNAPSHOT"
+  val LIFTVERSION = "2.3-SNAPSHOT"
 }
 
 trait DefaultLiftTemplate extends Template with Create with Delete {

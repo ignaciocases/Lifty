@@ -6,29 +6,24 @@ package ${cometpack}
 import net.liftweb._
 import http._
 import SHtml._ 
-import net.liftweb.common.{Box, Full}
-import net.liftweb.util._
-import net.liftweb.actor._
-import net.liftweb.util.Helpers._
-import net.liftweb.http.js.JsCmds.{SetHtml}
-import net.liftweb.http.js.JE.Str
+import common.{Box, Full}
+import util._
+import Helpers._
+import js.JsCmds.{SetHtml}
+import js.JE.Str
 
 class ${cometName} extends CometActor {
-	
-	// The following specifies a default prefix
-	override def defaultPrefix = Full("message") 
-	
-	// Intial bindings
-	def render = bind("message" -> <span>something</span>)
+      	// Intial bindings
+	def render = "#message" #> timeNow.toString
 	
 	// this is called 10sec after the instance is created
-	ActorPing.schedule(this, Message, 10000L)
+	ActorPing.schedule(this, Message(), 10 seconds)
 	
-	override def lowPriority: PartialFunction[Any,Unit] = {
-		case Message => {
-			partialUpdate(SetHtml("message", Str(timeNow.toString)))
-			ActorPing.schedule(this, Message, 10000L)
+	override def lowPriority = {
+		case Message() => {
+			partialUpdate(SetHtml("message", timeNow.toString))
+			ActorPing.schedule(this, Message(), 10 seconds)
 		}
 	}
 }
-case object Message
+case class Message()

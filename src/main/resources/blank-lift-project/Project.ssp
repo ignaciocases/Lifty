@@ -3,12 +3,6 @@
 import sbt._
 
 class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
-  val mavenLocal = "Local Maven Repository" at
-  "file://"+Path.userHome+"/.m2/repository"
-
-   val scalatoolsSnapshot = "Scala Tools Snapshot" at
-  "http://scala-tools.org/repo-snapshots/"
-
   val scalatoolsRelease = "Scala Tools Snapshot" at
   "http://scala-tools.org/repo-releases/"
 
@@ -19,7 +13,8 @@ class LiftProject(info: ProjectInfo) extends DefaultWebProject(info) {
     "net.liftweb" %% "lift-testkit" % liftVersion % "compile->default",
     //#inject point: dependencies
     "org.mortbay.jetty" % "jetty" % "6.1.22" % "test->default",
+    "ch.qos.logback" % "logback-classic" % "0.9.26",
     "junit" % "junit" % "4.5" % "test->default",
-    "org.scala-tools.testing" % "specs" % "1.6.1" % "test->default"
+    "org.scala-tools.testing" %% "specs" % "1.6.6" % "test->default"
   ) ++ super.libraryDependencies
 }

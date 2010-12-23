@@ -3,16 +3,10 @@
 
 package ${snippetpack}
 
-import xml.{Text, NodeSeq}
-import net.liftweb.util.Helpers._
-import net.liftweb.http.S._
-import net.liftweb.http.SHtml._
-import net.liftweb.common._
+import xml.{NodeSeq}
+import net.liftweb._
+import util.Helpers._
 
 class ${snippetName} {
-
-	def render(xhtml: NodeSeq): NodeSeq = {
-		<strong>hello world!</strong>
-	}
-
+	def render = "*" #> <strong>hello world!</strong>
 }

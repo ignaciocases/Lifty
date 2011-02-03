@@ -2,7 +2,7 @@
 
 package ${modelpack} {
 
-import net.liftweb.
+import net.liftweb._
 import mapper._
 import util._
 import common._
